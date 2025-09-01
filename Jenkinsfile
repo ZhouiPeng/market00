@@ -24,10 +24,12 @@ pipeline {
                 bat '''
                 cd ./backend
                 mvn clean package
-                docker build -t market-back:v1 .
-                docker image ls
                 '''
-                bat 'minikube image load market-back:v1'
+                bat '''
+                cd ./backend
+                docker build -t market-back:v1 .
+                '''
+                //bat 'minikube image load market-back:v1'
                 }
             }
         }/*
