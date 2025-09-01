@@ -60,8 +60,8 @@ pipeline {
                 }
             }
         }
-        
-    }*/
+        */
+    }
     post {
         always {
             echo "Kubernetes自动部署完成"
