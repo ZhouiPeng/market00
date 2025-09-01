@@ -1,0 +1,121 @@
+:root {
+  /* 响应式设计的尺寸划分 */
+  /* 电脑尺寸 */
+  --large-pc-screen-min-width: 1200px;
+  --pc-screen-min-width: 960px;
+  /* 平板及横屏手机尺寸 */
+  --horizontal-pad-screen-min-width: 770px;
+  --horizontal-phone-screen-min-width: 580px;
+  /* 竖屏手机尺寸 */
+  --vertical-phone-screen-min-width: 320px;
+
+  /* 槽宽（与页边距相同） */
+  --wide-slot-width: 24px;
+  --narrow-slot-width: 16px;
+
+  /* 内容区域宽度 */
+  /* 导航栏完全展开 */
+  /* 20px是滚动条的像素 */
+  --large-pc-screen-content-width: calc(100vw - var(--sidebar-width-unfold));
+  --pc-screen-content-width: calc(100vw - var(--sidebar-width-unfold));
+  /* 导航栏折叠 */
+  --horizontal-pad-screen-content-width: calc(100vw - var(--sidebar-width-fold));
+  --horizontal-phone-screen-content-width: calc(100vw - var(--sidebar-width-fold));
+  /* 导航栏在上方折叠 */
+  --vertical-phone-screen-content-width: calc(100vw);
+
+  /* 列宽 */
+  /* 电脑列宽 */
+  --large-pc-screen-col-width: calc((var(--large-pc-screen-content-width) - var(--wide-slot-width) * 14) / 12);
+  --pc-screen-col-width: calc((var(--pc-screen-content-width) - var(--wide-slot-width) * 14) / 12);
+  /* 平板及横屏手机列宽 */
+  --horizontal-pad-screen-col-width: calc((var(--horizontal-pad-screen-content-width) - var(--narrow-slot-width) * 10) / 8);
+  --horizontal-phone-screen-col-width: calc((var(--horizontal-phone-screen-content-width) - var(--narrow-slot-width) * 6) / 4);
+  /* 竖屏手机列宽 */
+  --vertical-phone-screen-col-width: calc((var(--vertical-phone-screen-content-width) - var(--narrow-slot-width) * 6) / 4);;
+
+  /* 左侧导航栏宽 */
+  --sidebar-width-unfold: 200px;
+  --sidebar-width-fold: 60px;
+
+  --header-height: 100px;
+  --animation-transition-duration: 500ms;
+
+  /* 色彩 */
+  --first-title-color: #606266;
+  --second-title-color: #909399;
+}
+/* .App {
+  min-width: calc(var(--pc-screen-min-width) - 20px);
+} */
+.full-width {
+  width: 100%;
+}
+.full-wh {
+  width: 100%;
+  height: 100%;
+}
+.display-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.frame {
+  min-height:650px;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: calc(var(--wide-slot-width) * 2);
+  margin-bottom: calc(var(--wide-slot-width) * 2);
+  width: 55%;
+  border: 2px;
+  border-radius: 4px;
+  box-shadow: var(--el-box-shadow-light);
+  background-color: white;
+}
+.form {
+  width: 80%;
+  margin-top: 6%;
+  margin-bottom: 6%;
+  padding: 5% 10% 5% 10%;
+}
+html {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+body {
+  margin-right: calc(100% - 100vw);
+  background-color: aliceblue;
+}
+/* 没有导航栏时的1200px内容宽度 */
+.single-main-width {
+  width: var(--large-pc-screen-content-width);
+  margin-left: calc(var(--sidebar-width-unfold) / 2);
+}
+.first-title-color {
+  color: var(--first-title-color);
+}
+.second-title-color {
+  color: var(--second-title-color);
+}
+  .header-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: var(--header-height);
+    width: 100%;
+    padding: 0;
+    z-index: 4;
+  }
+    .sidebar {
+    top: var(--header-height);
+    width: var(--sidebar-width-unfold);
+    position: fixed;
+    height: 90%;
+    overflow: hidden;
+    border-left: 0px;
+    z-index: 2;
+    box-shadow: var(--el-box-shadow);
+  }
+  .text-width {
+    max-width: 100%;
+  }
