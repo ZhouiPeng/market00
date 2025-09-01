@@ -13,12 +13,32 @@ pipeline {
                 }
             }
         }
-        
+        stage('构建后端，导入minikube') {
+            steps {
+                bat 'cd ./backend'
+                bat 'mvn clean pakage'
+                bat 'docker build -t market-back:v1 .'
+                bat 'minikube image load market-back:v1'
+                bat 'cd ..'
+                }
+            }
+        }
         stage('部署后端') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
                     bat 'kubectl apply -f backend-deployment.yaml'
                     bat 'kubectl apply -f backend-service.yaml'
+                }
+            }
+        }
+        stage('构建前端，导入minikube') {
+            steps {
+                bat 'cd ./frontend/src'
+                bat 'npm run build'
+                bat 'docker build -t market-front:v1 .'
+                bat 'minikube image load market-front:v1'
+                bat 'cd ..'
+                bat 'cd ..'
                 }
             }
         }
