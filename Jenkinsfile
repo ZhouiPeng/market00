@@ -47,6 +47,10 @@ pipeline {
                 bat '''
                 cd ./frontend
                 npm install
+                
+                '''
+                bat '''
+                cd ./frontend
                 npm run build
                 '''
                 bat '''
