@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: market-backend
+        image: market-back:v1
         imagePullPolicy: Never
         ports:
         - containerPort: 8081
@@ -30,4 +30,5 @@ spec:
             - name: DB_USER
               value: "root"
             - name: DB_PASSWORD
+
               value: "050223"
