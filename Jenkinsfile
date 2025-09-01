@@ -4,8 +4,9 @@ pipeline {
         jdk 'JDK-21'
         maven 'Maven'
         nodejs 'nodejs'
-    }/*
+    }
     stages {
+        /*
         stage('部署数据库') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
