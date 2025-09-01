@@ -17,7 +17,7 @@ pipeline {
                     bat 'kubectl apply -f mysql-service.yaml'
                 }
             }
-        }*/
+        }
         stage('构建后端，导入minikube') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
@@ -29,10 +29,10 @@ pipeline {
                 cd ./backend
                 docker build -t market-back:v1 .
                 '''
-                //bat 'minikube image load market-back:v1'
+                bat 'minikube image load market-back:v1'
                 }
             }
-        }/*
+        }
         stage('部署后端') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
@@ -40,20 +40,23 @@ pipeline {
                     bat 'kubectl apply -f backend-service.yaml'
                 }
             }
-        }
+        }*/
         stage('构建前端，导入minikube') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
                 bat '''
-                cd ./frontend/src
+                cd ./frontend
+                npm install
                 npm run build
-                docker build -t market-front:v1 .
-                
                 '''
-                bat 'minikube image load market-front:v1'
+                bat '''
+                cd ./frontend
+                docker build -t market-front:v1 .
+                '''
+                //bat 'minikube image load market-front:v1'
                 }
             }
-        }
+        }/*
         stage('部署前端') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
@@ -61,8 +64,8 @@ pipeline {
                     bat 'kubectl apply -f frontend-service.yaml'
                 }
             }
-        }
-        */
+        }*/
+        
     }
     post {
         always {
