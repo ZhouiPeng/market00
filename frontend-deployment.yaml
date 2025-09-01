@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: nginx:v6
+        image: market-front:v1
         imagePullPolicy: Never
         ports:
         - containerPort: 80
@@ -24,3 +24,4 @@ spec:
         - name: BACKEND_API_URL
           value: "http://backend:80"
         
+
