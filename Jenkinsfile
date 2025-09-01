@@ -16,7 +16,7 @@ pipeline {
                     bat 'kubectl apply -f mysql-service.yaml'
                 }
             }
-        }/*
+        }*/
         stage('构建后端，导入minikube') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
