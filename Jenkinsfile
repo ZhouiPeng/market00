@@ -19,11 +19,12 @@ pipeline {
         }
         stage('构建后端，导入minikube') {
             steps {
-                bat 'cd ./backend'
-                bat 'mvn clean package'
-                bat 'docker build -t market-back:v1 .'
-                bat 'minikube image load market-back:v1'
-                bat 'cd ..'
+                bat '''
+                cd ./backend
+                mvn clean package
+                docker build -t market-back:v1 .
+                minikube image load market-back:v1
+                '''
                 }
             }
         
@@ -37,12 +38,12 @@ pipeline {
         }
         stage('构建前端，导入minikube') {
             steps {
-                bat 'cd ./frontend/src'
-                bat 'npm run build'
-                bat 'docker build -t market-front:v1 .'
-                bat 'minikube image load market-front:v1'
-                bat 'cd ..'
-                bat 'cd ..'
+                bat '''
+                cd ./frontend/src
+                npm run build
+                docker build -t market-front:v1 .
+                minikube image load market-front:v1
+                '''
                 }
             }
         
