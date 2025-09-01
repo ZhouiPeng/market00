@@ -1,6 +1,10 @@
 pipeline {
     agent any
-
+    tools{
+        jdk 'JDK-21'
+        maven 'Maven'
+        nodejs 'nodejs'
+    }
     stages {
         stage('部署数据库') {
             steps {
@@ -16,13 +20,13 @@ pipeline {
         stage('构建后端，导入minikube') {
             steps {
                 bat 'cd ./backend'
-                bat 'mvn clean pakage'
+                bat 'mvn clean package'
                 bat 'docker build -t market-back:v1 .'
                 bat 'minikube image load market-back:v1'
                 bat 'cd ..'
                 }
             }
-        }
+        
         stage('部署后端') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
@@ -41,7 +45,7 @@ pipeline {
                 bat 'cd ..'
                 }
             }
-        }
+        
         stage('部署前端') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
