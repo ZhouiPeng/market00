@@ -25,11 +25,12 @@ pipeline {
                 cd ./backend
                 mvn clean package
                 docker build -t market-back:v1 .
+                docker image ls
                 '''
                 bat 'minikube image load market-back:v1'
                 }
             }
-        }
+        }/*
         stage('部署后端') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
@@ -60,7 +61,7 @@ pipeline {
             }
         }
         
-    }
+    }*/
     post {
         always {
             echo "Kubernetes自动部署完成"
