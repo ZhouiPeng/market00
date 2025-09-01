@@ -6,7 +6,6 @@ pipeline {
         nodejs 'nodejs'
     }
     stages {
-        /*
         stage('部署数据库') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
@@ -40,7 +39,7 @@ pipeline {
                     bat 'kubectl apply -f backend-service.yaml'
                 }
             }
-        }*/
+        }
         stage('构建前端，导入minikube') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
@@ -57,10 +56,10 @@ pipeline {
                 cd ./frontend
                 docker build -t market-front:v1 .
                 '''
-                //bat 'minikube image load market-front:v1'
+                bat 'minikube image load market-front:v1'
                 }
             }
-        }/*
+        }
         stage('部署前端') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
@@ -68,7 +67,7 @@ pipeline {
                     bat 'kubectl apply -f frontend-service.yaml'
                 }
             }
-        }*/
+        }
         
     }
     post {
