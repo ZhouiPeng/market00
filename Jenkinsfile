@@ -9,8 +9,8 @@ pipeline {
         stage('清除deployment,service') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
-                    //bat 'kubectl delete deployment backend --ignore-not-found'
-                    //bat 'kubectl delete deployment frontend --ignore-not-found'
+                    bat 'kubectl delete deployment backend --ignore-not-found'
+                    bat 'kubectl delete deployment frontend --ignore-not-found'
                     bat 'kubectl delete service backend --ignore-not-found'
                     bat 'kubectl delete service frontend --ignore-not-found'
                 }
@@ -19,10 +19,28 @@ pipeline {
          stage('清除镜像') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
-                    bat 'minikube image rm market-back:v1 || echo"minikube无market-back:v1"'
-                    bat 'docker image rm market-back:v1 || echo"docker无market-back:v1"'
-                    bat 'minikube image rm market-front:v1 || echo"minikube无market-front:v1"'
-                    bat 'docker image rm market-front:v1 || echo"docker无market-front:v1"'
+                    script {
+                    try {
+                        bat 'minikube image rm market-back:v1'
+                    } catch (Exception e) {
+                        echo 'minikube无market-back:v1'
+                    }
+                    try {
+                        bat 'minikube image rm market-front:v1'
+                    } catch (Exception e) {
+                        echo 'minikube无market-front:v1'
+                    }
+                    try {
+                        bat 'docker image rm market-back:v1'
+                    } catch (Exception e) {
+                        echo 'docker无market-back:v1'
+                    }
+                    try {
+                        bat 'docker image rm market-front:v1'
+                    } catch (Exception e) {
+                        echo 'docker无market-front:v1'
+                    }
+                    }
                 }
             }
         }
