@@ -56,7 +56,7 @@ const question = ref("") // 输入框值
 const chatList = ref([]) // 循环的聊天数组
 const scrollbarRef = ref(null)
 const currentUser = ref("user1") // 当前用户
-const otherUser = ref("user3") // 对方用户
+const otherUser = ref("Alice") // 对方用户
 
 // 创建新的对话数组，加上属性 showTime
 const messagesWithTimestamps = computed(() => {
