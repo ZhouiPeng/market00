@@ -6,6 +6,26 @@ pipeline {
         //nodejs 'nodejs'
     }
     stages {
+        stage('清除deployment,service') {
+            steps {
+                withKubeConfig([credentialsId: 'k8s1']) {
+                    bat 'kubectl delete deployment backend || echo "无backend-deployment"'
+                    bat 'kubectl delete deployment frontend || echo "无frontend-deployment"'
+                    bat 'kubectl delete service backend || echo "无backend-service"'
+                    at 'kubectl delete service frontend || echo "无frontend-service"'
+                }
+            }
+        }
+         stage('清除镜像') {
+            steps {
+                withKubeConfig([credentialsId: 'k8s1']) {
+                    bat 'minikube image rm market-back:v1 || echo"minikube无market-back:v1"'
+                    bat 'docker image rm market-back:v1 || echo"docker无market-back:v1"'
+                    bat 'minikube image rm market-front:v1 || echo"minikube无market-front:v1"'
+                    bat 'docker image rm market-front:v1 || echo"docker无market-front:v1"'
+                }
+            }
+        }
         stage('部署数据库') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
