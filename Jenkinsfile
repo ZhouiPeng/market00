@@ -9,8 +9,8 @@ pipeline {
         stage('清除deployment,service') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
-                    bat 'kubectl delete deployment backend --ignore-not-found'
-                    bat 'kubectl delete deployment frontend --ignore-not-found'
+                    //bat 'kubectl delete deployment backend --ignore-not-found'
+                    //bat 'kubectl delete deployment frontend --ignore-not-found'
                     bat 'kubectl delete service backend --ignore-not-found'
                     at 'kubectl delete service frontend --ignore-not-found'
                 }
