@@ -3,7 +3,7 @@ pipeline {
     tools{
         jdk 'JDK-21'
         maven 'Maven'
-        nodejs 'nodejs'
+        //nodejs 'nodejs'
     }
     stages {
         stage('部署数据库') {
