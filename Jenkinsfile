@@ -6,7 +6,6 @@ pipeline {
   stages {
     stage('1.1用户的注册与登录') {
       steps {
-        bat "apifox config set base_url=%base_url%"
         bat 'apifox run --access-token %APIFOX_ACCESS_TOKEN% -t 7174486 -e 37208381 -n 1 -r html,cli'
       }
     }
