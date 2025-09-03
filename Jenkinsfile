@@ -3,8 +3,21 @@ pipeline {
 
   tools {nodejs "nodejs23"}
 
-  
   stages {
+    stage('1.1用户的注册与登录') {
+      steps {
+        bat "apifox config set base_url=%base_url%"
+        bat 'apifox run --access-token %APIFOX_ACCESS_TOKEN% -t 7174486 -e 37208381 -n 1 -r html,cli'
+      }
+    }
+
+    stage('用户的基础信息修改与重新登录') {
+      steps {
+        bat "apifox config set base_url=%base_url%"
+        bat 'apifox run --access-token %APIFOX_ACCESS_TOKEN% -t 7174802 -e 37208381 -n 1 -r html,cli'
+      }
+    }    
+    
     stage('1.3个人简介的修改与获取') {
       steps {
         bat "apifox config set base_url=%base_url%"
