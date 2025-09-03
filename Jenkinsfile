@@ -2,7 +2,7 @@ pipeline {
   agent any
   
   environment {
-    base_url = http://127.0.0.1:57137/
+    base_url = 'http://127.0.0.1:57137/'
   }
   
   tools {nodejs "nodejs23"}
