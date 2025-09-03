@@ -2,7 +2,7 @@ pipeline {
   agent any
   
   environment {
-    base_url = credentials('https://backend:80')
+    base_url = credentials('http://127.0.0.1:56779/')
   }
   
   tools {nodejs "nodejs23"}
