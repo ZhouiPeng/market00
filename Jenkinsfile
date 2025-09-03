@@ -1,9 +1,6 @@
 pipeline {
   agent any
   
-  environment {
-    base_url = 'http://127.0.0.1:59999'
-  }
   
   tools {nodejs "nodejs23"}
 
