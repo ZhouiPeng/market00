@@ -111,8 +111,8 @@ pipeline {
         stage('打开后端服务测试端口，打开数据库服务测试端口') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
-                    bat 'start /B kubectl port-forward svc/backend 59999:80 > portforward.log 2>&1'
-                    bat 'start /B kubectl port-forward svc/mysql 59995:3306 > portforward.log 2>&1'
+                    bat 'start /B kubectl port-forward svc/backend 59999:80 > portforward1.log 2>&1'
+                    bat 'start /B kubectl port-forward svc/mysql 59995:3306 > portforward2.log 2>&1'
                 }
             }
         }
