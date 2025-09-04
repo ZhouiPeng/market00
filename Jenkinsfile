@@ -49,7 +49,7 @@ pipeline {
                 withKubeConfig([credentialsId: 'k8s1']) {
 
                     bat 'minikube update-context'
-                    bat 'minikube image load mysql:8.0.43'
+                    //bat 'minikube image load mysql:8.0.43'
                     bat 'kubectl apply -f mysqlpv.yaml'
                     bat 'kubectl apply -f init.yaml'
                     bat 'kubectl apply -f mysql-deployment.yaml'
@@ -111,8 +111,8 @@ pipeline {
         stage('打开后端服务测试端口，打开数据库服务测试端口') {
             steps {
                 withKubeConfig([credentialsId: 'k8s1']) {
-                    bat 'kubectl port-forward svc/backend 59999:80'
-                    bat 'kubectl port-forward svc/mysql 59995:3306'
+                    bat 'start /B kubectl port-forward svc/backend 59999:80 > portforward.log 2>&1'
+                    bat 'start /B kubectl port-forward svc/mysql 59995:3306 > portforward.log 2>&1'
                 }
             }
         }
@@ -180,5 +180,8 @@ pipeline {
         always {
             echo "微服务流水线部署完成"
         }
+    }
+    triggers {
+        githubPush()
     }
 }
